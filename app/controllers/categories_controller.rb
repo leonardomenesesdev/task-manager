@@ -1,13 +1,15 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_category, only: %i[ show edit update destroy ]
 
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = current_user.categories
   end
 
   # GET /categories/1 or /categories/1.json
   def show
+    authorize @category
   end
 
   # GET /categories/new
@@ -21,7 +23,7 @@ class CategoriesController < ApplicationController
 
   # POST /categories or /categories.json
   def create
-    @category = Category.new(category_params)
+    @category = current_user.categories.build(category_params)
 
     respond_to do |format|
       if @category.save
@@ -36,6 +38,7 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
+    authorize @category
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: "Category was successfully updated.", status: :see_other }
@@ -49,6 +52,7 @@ class CategoriesController < ApplicationController
 
   # DELETE /categories/1 or /categories/1.json
   def destroy
+    authorize @category
     @category.destroy!
 
     respond_to do |format|
@@ -61,10 +65,11 @@ class CategoriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_category
       @category = Category.find(params.expect(:id))
+      authorize @category
     end
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.expect(category: [ :name, :User_id ])
+      params.expect(category: [ :name ])
     end
 end
