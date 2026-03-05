@@ -4,11 +4,12 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = current_user.tasks
+    @tasks = policy_scope(Task)
   end
 
   # GET /tasks/1 or /tasks/1.json
   def show
+    authorize @task
   end
 
   # GET /tasks/new
@@ -37,6 +38,7 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    authorize @task
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: "Task was successfully updated.", status: :see_other }
@@ -50,6 +52,7 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    authorize @task
     @task.destroy!
 
     respond_to do |format|
@@ -62,6 +65,7 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params.expect(:id))
+      authorize @task
     end
 
     # Only allow a list of trusted parameters through.
