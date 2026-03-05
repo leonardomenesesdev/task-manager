@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   has_many :categories, dependent: :destroy
   has_many :tasks, dependent: :destroy
+
+  def admin?
+    email.ends_with?("@rails.com")
+  end
 end
