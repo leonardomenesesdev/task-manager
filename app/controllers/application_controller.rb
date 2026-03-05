@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def user_not_authorized(exception)
     policy_name = exception.policy.class.to_s.underscore
 
-    flash[:alert] = 'Acesso negado para esta ação.'
+    flash[:alert] = "Acesso negado para esta ação."
     redirect_back(fallback_location: root_path)
   end
 end
