@@ -1,0 +1,41 @@
+<div class="max-w-md mx-auto mt-16 bg-zinc-900 border border-zinc-800 rounded-2xl p-8 shadow-lg">
+  
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-extrabold text-green-500">Sign Up</h2>
+    <p class="text-zinc-400 text-sm mt-2">Create your Task Manager account</p>
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-5" }) do |f| %>
+    
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div>
+      <%= f.label :email, class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
+
+    <div>
+      <div class="flex justify-between items-baseline mb-1">
+        <%= f.label :password, class: "block text-sm font-medium text-zinc-300" %>
+        <% if @minimum_password_length %>
+          <span class="text-xs text-zinc-500">(<%= @minimum_password_length %> characters minimum)</span>
+        <% end %>
+      </div>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, "Confirm Password", class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
+
+    <div class="pt-4">
+      <%= f.submit "Sign Up", class: "w-full bg-green-600 hover:bg-green-500 text-black font-bold text-lg px-6 py-3 rounded-lg transition-colors cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <div class="mt-6 pt-6 border-t border-zinc-800 flex flex-col gap-3 text-center text-sm text-green-400 hover:text-green-300 transition-colors">
+    <%= render "devise/shared/links" %>
+  </div>
+
+</div>

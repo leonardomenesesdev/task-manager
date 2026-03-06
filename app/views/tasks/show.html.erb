@@ -1,10 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold text-green-500 mb-6 text-center">
+    Task Details
+  </h1>
 
-<%= render @task %>
+  <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6 shadow-lg mb-6">
+    <%= render @task %>
+  </div>
 
-<div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
+  <div class="flex flex-wrap items-center gap-4">
+    
+    <%= link_to "Edit this task", edit_task_path(@task), 
+        class: "bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-300 font-semibold px-6 py-2 rounded-lg transition-colors" %> 
+    
+    <%= link_to "Back to tasks", tasks_path, 
+        class: "text-green-400 hover:text-green-300 font-medium transition-colors" %>
 
-  <%= button_to "Destroy this task", @task, method: :delete %>
+    <div class="ml-auto">
+      <%= button_to "Destroy this task", @task, method: :delete, 
+          class: "bg-red-900/40 hover:bg-red-600 text-red-400 hover:text-white border border-red-800 hover:border-red-600 font-semibold px-6 py-2 rounded-lg transition-colors" %>
+    </div>
+    
+  </div>
 </div>

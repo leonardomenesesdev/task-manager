@@ -1,10 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-green-400 mb-4 text-center"><%= notice %></p>
 
-<%= render @category %>
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold text-green-500 mb-6 text-center">
+    Category Details
+  </h1>
 
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
+  <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6 shadow-lg mb-6">
+    <%= render @category %>
+  </div>
 
-  <%= button_to "Destroy this category", @category, method: :delete %>
+  <div class="flex flex-wrap items-center gap-4">
+    
+    <%= link_to "Edit this category", edit_category_path(@category), 
+        class: "bg-green-600 hover:bg-green-500 text-black font-semibold px-6 py-2 rounded-lg transition-colors" %>
+
+    <%= link_to "Back to categories", categories_path, 
+        class: "text-green-400 hover:text-green-300 font-medium transition-colors" %>
+
+    <div class="ml-auto">
+      <%= button_to "Destroy this category", @category, method: :delete, 
+          class: "bg-red-900/40 hover:bg-red-600 text-red-400 hover:text-white border border-red-800 hover:border-red-600 font-semibold px-6 py-2 rounded-lg transition-colors" %>
+    </div>
+
+  </div>
 </div>

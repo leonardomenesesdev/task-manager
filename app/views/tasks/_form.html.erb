@@ -1,9 +1,9 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: task, class: "bg-zinc-900 border border-zinc-800 rounded-xl p-6 shadow-lg max-w-2xl mx-auto") do |form| %>
+  
   <% if task.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-900/40 border border-red-800 text-red-400 p-4 rounded-lg mb-6">
+      <h2 class="font-bold mb-2"><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+      <ul class="list-disc list-inside text-sm">
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -11,35 +11,34 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
-  </div>
-  <div>
-    <%= form.label :category_id, "Categoria" %>
-    <%= form.collection_select :category_id,
-          current_user.categories,
-          :id,
-          :name,
-          prompt: "Selecione uma categoria" %>
-  </div>
-  
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="space-y-5">
+    <div>
+      <%= form.label :title, class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= form.text_field :title, class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
+
+    <div>
+      <%= form.label :category_id, "Categoria", class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= form.collection_select :category_id, current_user.categories, :id, :name, { prompt: "Selecione uma categoria" }, class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors appearance-none" %>
+    </div>
+    
+    <div>
+      <%= form.label :description, class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= form.text_field :description, class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
+
+    <div>
+      <%= form.label :status, class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= form.select :status, Task.statuses.keys, {}, class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors appearance-none" %>
+    </div>
+
+    <div>
+      <%= form.label :end_date, class: "block text-sm font-medium text-zinc-300 mb-1" %>
+      <%= form.text_field :end_date, class: "w-full bg-zinc-800 border border-zinc-700 text-zinc-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors" %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :status %>
-    <%= form.select :status, Task.statuses.keys %>
-  </div>
-
-  <div>
-    <%= form.label :end_date, style: "display: block" %>
-    <%= form.text_field :end_date %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mt-8">
+    <%= form.submit class: "w-full bg-green-600 hover:bg-green-500 text-black font-bold text-lg px-6 py-3 rounded-lg transition-colors cursor-pointer" %>
   </div>
 <% end %>
