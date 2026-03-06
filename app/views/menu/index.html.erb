@@ -1,0 +1,54 @@
+<div class="max-w-4xl mx-auto mt-4">
+  
+  <div class="text-center mb-10">
+    <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600 mb-3">
+      Menu
+    </h1>
+    <p class="text-zinc-400 text-lg">Manage your workflow efficiently.</p>
+  </div>
+
+  <% if user_signed_in? %>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      
+      <%= link_to tasks_path, class: "group bg-zinc-900 border border-zinc-800 hover:border-green-500 rounded-2xl p-8 shadow-lg transition-all duration-300 flex flex-col items-center justify-center text-center h-48" do %>
+        <svg class="w-12 h-12 text-zinc-500 group-hover:text-green-500 mb-4 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <h2 class="text-2xl font-bold text-zinc-200 group-hover:text-green-400 transition-colors">My Tasks</h2>
+        <p class="text-zinc-500 text-sm mt-2">View and manage your daily tasks</p>
+      <% end %>
+
+      <%= link_to categories_path, class: "group bg-zinc-900 border border-zinc-800 hover:border-green-500 rounded-2xl p-8 shadow-lg transition-all duration-300 flex flex-col items-center justify-center text-center h-48" do %>
+        <svg class="w-12 h-12 text-zinc-500 group-hover:text-green-500 mb-4 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+        <h2 class="text-2xl font-bold text-zinc-200 group-hover:text-green-400 transition-colors">Categories</h2>
+        <p class="text-zinc-500 text-sm mt-2">Organize your workflow by contexts and areas</p>
+      <% end %>
+
+      <% if current_user.admin? %>
+        <%= link_to admin_users_path, class: "group bg-zinc-900 border border-zinc-800 hover:border-yellow-500 rounded-2xl p-8 shadow-lg transition-all duration-300 flex flex-col items-center justify-center text-center h-48 md:col-span-2" do %>
+          <svg class="w-12 h-12 text-zinc-500 group-hover:text-yellow-500 mb-4 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <h2 class="text-2xl font-bold text-zinc-200 group-hover:text-yellow-400 transition-colors">Manage Users</h2>
+          <p class="text-zinc-500 text-sm mt-2">Exclusive area for system administrators</p>
+        <% end %>
+      <% end %>
+
+    </div>
+
+    <div class="mt-12 text-center border-t border-zinc-800 pt-8">
+      <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete }, 
+          class: "inline-flex items-center gap-2 bg-zinc-800/50 border border-zinc-700 hover:bg-red-900/40 hover:text-red-400 hover:border-red-800 text-zinc-400 font-semibold px-8 py-3 rounded-lg transition-colors" %>
+    </div>
+
+  <% else %>
+    
+    <div class="max-w-md mx-auto mt-16 text-center bg-zinc-900 border border-zinc-800 rounded-2xl p-10 shadow-lg">
+      <svg class="w-16 h-16 text-zinc-600 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+      <h2 class="text-2xl font-bold text-zinc-200 mb-2">Restricted Access</h2>
+      <p class="text-zinc-500 mb-8">Please sign in to access your workspace.</p>
+      
+      <%= link_to "Sign In", new_user_session_path, 
+          class: "w-full block bg-green-600 hover:bg-green-500 text-black font-bold text-lg px-8 py-3 rounded-lg transition-colors" %>
+    </div>
+
+  <% end %>
+
+</div>

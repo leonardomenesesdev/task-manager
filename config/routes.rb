@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "menu/index"
   resources :tasks
   resources :categories
   devise_for :users
@@ -13,5 +14,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  root "categories#index"
+  root "menu#index"
+  resources :categories
+  resources :tasks
+  namespace :admin do
+    resources :users
+  end
 end

@@ -6,17 +6,21 @@ class CategoryPolicy < ApplicationPolicy
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
   class Scope < ApplicationPolicy::Scope
     def resolve
+      if user.admin?
+        scope.all
+      else
       scope.where(user: user)
+      end
     end
   end
   def show?
-    record.user == user
+    user.admin? || record.user == user
   end
   def update?
-    record.user == user
+    user.admin? || record.user == user
   end
   def destroy?
-    record.user == user
+    user.admin? || record.user == user
   end
   def edit?
     update?
