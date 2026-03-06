@@ -26,9 +26,7 @@
   <body>
     <%= yield %>
   </body>
-  <% if current_user&.admin? %>
-  <%= link_to "Manage Users", admin_users_path %>
-  <% end %>
+  
   <% flash.each do |type, message| %>
   <p><%= message %></p>
   <% end %>
