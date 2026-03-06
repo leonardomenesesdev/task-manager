@@ -8,6 +8,6 @@ class User < ApplicationRecord
   has_many :tasks, dependent: :destroy
 
   def admin?
-    email.ends_with?("@rails.com")
+    admin
   end
 end

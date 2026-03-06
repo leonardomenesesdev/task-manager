@@ -1,0 +1,21 @@
+<h1>Users</h1>
+
+<%= link_to "Create new user", new_admin_user_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Admin</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.admin? ? "Yes" : "No" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
