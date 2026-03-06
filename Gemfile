@@ -68,6 +68,11 @@ group :test do
   gem "rspec-rails"
 end
 
+group :production do
+  gem "pg"
+end
+
+
 gem "pundit", "~> 2.5"
 
 gem "tailwindcss-rails", "~> 4.4"
