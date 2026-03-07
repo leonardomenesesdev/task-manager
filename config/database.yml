@@ -59,9 +59,19 @@ test:
   database: task_manager_test
   
 production:
-  <<: *default
-  adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
+  primary: &primary_production
+    <<: *default
+    adapter: postgresql
+    url: <%= ENV['DATABASE_URL'] %>
+  cache:
+    <<: *primary_production
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    migrations_paths: db/cable_migrate
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
