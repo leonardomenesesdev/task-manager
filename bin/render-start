@@ -1,0 +1,4 @@
+#!/bin/bash -e
+# Start no Render: prepara o banco (schema + seeds na primeira vez) e sobe o Puma.
+./bin/rails db:prepare
+exec ./bin/rails server

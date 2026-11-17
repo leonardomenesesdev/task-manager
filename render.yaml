@@ -5,9 +5,9 @@ services:
     name: task-manager
     runtime: docker
     plan: free
-    # Puma direto (sem Thruster), escutando na $PORT que o Render define.
-    # O entrypoint roda `db:prepare` (cria schema + seeds) antes de subir.
-    dockerCommand: ./bin/rails server
+    # Roda `db:prepare` (schema + seeds na primeira vez) e sobe o Puma direto
+    # (sem Thruster), escutando na $PORT que o Render define.
+    dockerCommand: ./bin/render-start
     healthCheckPath: /up
     envVars:
       - key: DATABASE_URL
