@@ -1,0 +1,20 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Banco: Postgres externo no Neon (o workspace já usa o Postgres grátis do Render).
+services:
+  - type: web
+    name: task-manager
+    runtime: docker
+    plan: free
+    # Roda `db:prepare` (schema + seeds na primeira vez) e sobe o Puma direto
+    # (sem Thruster), escutando na $PORT que o Render define.
+    dockerCommand: ./bin/render-start
+    healthCheckPath: /up
+    envVars:
+      - key: DATABASE_URL
+        sync: false # connection string do Neon, preenchida no painel
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: "1"
+      - key: RAILS_MAX_THREADS
+        value: "3"
